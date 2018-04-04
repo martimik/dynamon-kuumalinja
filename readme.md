@@ -36,6 +36,12 @@ Dynamon kuumalinja on irc labranet ympäristössä. Sovellus hakee tiedot labran
 
 ![](Images/kasitemalli.png)
 
+## Mockup
+
+![](Images/MockupLogin.png)
+![](Images/MockupChat.png)
+
+
 ## Työnjako
 
 Mikko:
