@@ -41,6 +41,7 @@ Sovellus toteutetaan MVVM-mallin mukaisesti
 ## Mockup
 
 ![](Images/MockupLogin.png)
+![](Images/MockupChat.png)
 
 ## Työnjako
 
