@@ -27,10 +27,20 @@ Dynamon kuumalinja on irc labranet ympäristössä. Sovellus hakee tiedot labran
 
 ## Toteutettavat toiminnot
 
-- Käyttäjä pystyy rekisteröitymään palveluun
-- Käyttäjä pystyy luomaan "huoneita"
-- Käyttäjä pystyy moderoimaan omia huoneitaan
-- Käyttäjä pystyy lähettämään ja lukemaan viestejä huoneissa, joihin hänellä on salasana
+### Prioriteetti 1
+
+* Viestin lähetys
+* Viestien lukeminen
+* Huoneiden valinta
+* Huoneiden luonti
+* Huoneiden filtteröinti
+
+### Prioriteetti 2
+
+* Huoneiden salasanan vaihtaminen
+* käyttäjän poistaminen kanavalta
+* huoneiden poisto
+
 
 ## Käsitemalli
 
