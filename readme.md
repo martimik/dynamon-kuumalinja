@@ -34,6 +34,7 @@ Dynamon kuumalinja on irc labranet ympäristössä. Sovellus hakee tiedot labran
 * Huoneiden valinta
 * Huoneiden luonti
 * Huoneiden filtteröinti
+* Sisäänkirjautuminen
 
 ### Prioriteetti 2
 
@@ -65,3 +66,14 @@ Yhdessä:
 - Toteutus
 
 ## Työaikasuunnitelma
+
+## TO-DO
+- dialogiboxi väärillä tunnuksilla tapahtuvalle kirjautumisyritykselle
+- Chat ikkuna
+- ER-kaavio
+- Testidata
+- C# mysql referenssit
+
+## Done
+
+
