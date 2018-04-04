@@ -66,3 +66,14 @@ Yhdessä:
 - Toteutus
 
 ## Työaikasuunnitelma
+
+## TO-DO
+- dialogiboxi väärillä tunnuksilla tapahtuvalle kirjautumisyritykselle
+- Chat ikkuna
+- ER-kaavio
+- Testidata
+- C# mysql referenssit
+
+## Done
+
+

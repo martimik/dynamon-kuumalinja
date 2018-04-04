@@ -24,5 +24,28 @@ namespace Dynamon_kuumalinja
         {
             InitializeComponent();
         }
+
+        private void txtUser_KeyDown(object sender, KeyEventArgs e)
+        {
+            
+            if (e.Key == Key.Return)// when enter key is pressed, calling btnLogin_click
+            {
+                btnLogin_Click(sender, e);
+            }
+        }
+
+        private void pwbPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Return)// when enter key is pressed, calling btnLogin_click
+            {
+                btnLogin_Click(sender, e);
+            }
+        }
+
+        private void btnLogin_Click(object sender, RoutedEventArgs e) 
+        {
+            // goes to viewmodel to call databasestuff
+            txbUser.Text = txtUser.Text;
+        }
     }
 }

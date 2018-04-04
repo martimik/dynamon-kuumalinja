@@ -8,9 +8,11 @@
         Title="Dynamon kuumalinja" Height="350" Width="525">
     <Grid>
         <StackPanel>
-            <TextBox x:Name="txtUser"></TextBox>
-            <PasswordBox x:Name="pwbPassword"></PasswordBox>
-            <Button x:Name="btnLogin" Content="Kirjaudu"></Button>
+            <TextBlock x:Name="txbUser" Text="User"></TextBlock>
+            <TextBox x:Name="txtUser" KeyDown="txtUser_KeyDown"></TextBox>
+            <TextBlock x:Name="txbPassword" Text="Password"></TextBlock>
+            <PasswordBox x:Name="pwbPassword" KeyDown="pwbPassword_KeyDown"></PasswordBox>
+            <Button x:Name="btnLogin" Content="Kirjaudu" Click="btnLogin_Click"></Button>
             
         </StackPanel>
     </Grid>
