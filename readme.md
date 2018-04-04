@@ -9,6 +9,8 @@
 
 Dynamon kuumalinja on irc labranet ympäristössä. Sovellus hakee tiedot labranetin mysql-palvelimelta, joten käyttäjän tulee olla labranettiin yhteydessä, jotta sovellus toimii.
 
+Sovellus toteutetaan MVVM-mallin mukaisesti
+
 ### Käyttöympäristö
 
 * Labranet
@@ -35,6 +37,10 @@ Dynamon kuumalinja on irc labranet ympäristössä. Sovellus hakee tiedot labran
 ## Käsitemalli
 
 ![](Images/kasitemalli.png)
+
+## Mockup
+
+![](Images/MockupLogin.png)
 
 ## Työnjako
 
