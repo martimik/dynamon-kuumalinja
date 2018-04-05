@@ -8,7 +8,8 @@ namespace Dynamon_kuumalinja.ViewModel
 {
     class User
     {
-
+        // properties
+        public int userID { get; set; }
 
     }
 }
