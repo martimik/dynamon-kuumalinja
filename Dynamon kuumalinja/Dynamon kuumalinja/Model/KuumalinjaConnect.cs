@@ -83,8 +83,34 @@ namespace Dynamon_kuumalinja
             catch (Exception ex)
             {
                 throw ex;
-            }           
+            }
+        }
 
+        public static List<Message> GetMessages(Channel kanava)
+        {
+            try
+            {
+                List<Message> messages = new List<Message>();
+                string connstr = ConnectionString();
+                string sql = string.Format("SELECT message.timeStamp, user.userID, message.content FROM message JOIN user ON message.userID = user.userID WHERE channelID = {0}", kanava.ChannelID);
+                using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
+                {
+                    conn.Open(); // avataan yhteys
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan
+                    using (MySqlDataReader reader = cmd.ExecuteReader()) // luodaan datanlukija
+                    {
+                        while (reader.Read())
+                        {
+                            messages.Add(new Message(reader.GetString(1), reader.GetInt32(0), reader.GetString(2)));
+                        }
+                    }
+                }
+                return messages;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
     }
 

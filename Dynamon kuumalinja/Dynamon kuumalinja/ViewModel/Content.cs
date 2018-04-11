@@ -38,6 +38,25 @@ namespace Dynamon_kuumalinja
         public int UserID { get; set; }
         public string TimeStamp { get; set; }
         public string Content { get; set; }
+        //constructors
+        public Message()
+        {
+
+        }
+        public Message( string timestamp, int userid, string content)
+        {            
+            UserID = userid;
+            TimeStamp = timestamp;
+            Content = content;
+        }
+        public Message(int message, int channelid, int userid, string timestamp, string content)
+        {
+            MessageID = message;
+            ChannelID = channelid;
+            UserID = userid;
+            TimeStamp = timestamp;
+            Content = content;
+        }
     }
 
     public class Channel

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Dynamon_kuumalinja
 {
-    public static class ChatWindow
+    public static class ChatWindowLogic
     {
 
         public static List<Channel> HaeKanavat()
@@ -21,9 +21,22 @@ namespace Dynamon_kuumalinja
             catch (Exception ex)
             {
                 throw ex;
-            }
-            
+            }            
         }
         
+        public static List<Message> HaeViestit(Channel channel)
+        {
+            try
+            {
+                List<Message> messages = new List<Message>();
+                messages = KuumalinjaConnect.GetMessages(channel);
+                return messages;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
     }
 }
