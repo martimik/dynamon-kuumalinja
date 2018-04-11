@@ -13,22 +13,26 @@ namespace Dynamon_kuumalinja
         {
             try
             {
-                if (KuumalinjaConnect.CheckLogin(username, password))
-                {                    
+                User kayttaja = new User(username, password);
+
+                // haetaan käyttäjät ja salasanat
+                if (KuumalinjaConnect.CheckLogin(kayttaja) != null)
+                {
+                    kayttaja = KuumalinjaConnect.CheckLogin(kayttaja); // ei hyvä, tekee mysql haun uudestaan
                     var mainWindow = (Application.Current.MainWindow as MainWindow);
                     if(mainWindow != null)
-                    {
-                        Chat chatti = new Chat();                        
+                    {                       
+                        Chat chatti = new Chat(kayttaja);
                         mainWindow.Close();
                         chatti.Show();
                     }                    
                 }
-                else
+                else // jos väärin niin popataan virheviesti
                 {
                     MessageBox.Show("Wrong username/password");
                 }
             }
-            catch (Exception ex)
+            catch (Exception ex) // poikkeustenkäsittelyä
             {
                 throw ex;
             }
