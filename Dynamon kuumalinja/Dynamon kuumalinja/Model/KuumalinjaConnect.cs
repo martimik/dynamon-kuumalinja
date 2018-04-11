@@ -56,7 +56,7 @@ namespace Dynamon_kuumalinja
                 // luodaan yhteys tietokantaan
                 string connstr = ConnectionString();
                 // haetaan käyttäjät
-                string sql = string.Format("SELECT username, password FROM user WHERE username = '{0}' AND password '{1}'", username, password);
+                string sql = string.Format("SELECT username, password FROM user WHERE username = '{0}' AND password = '{1}'", username, password);
                 using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
                 {
                     conn.Open(); // avataan yhteys
