@@ -10,44 +10,16 @@ using MySql.Data.MySqlClient; // mysql nimiavaruus
 namespace Dynamon_kuumalinja
 {
     public static class KuumalinjaConnect
-    {        
-        public static List<User> ConnectToKuumalinja(string sql) // parametrinä välitetään sql-query
-        {
-            try
-            {
-                List<User> users = new List<User>();
-
-                // luodaan yhteys tietokantaan
-                string connstr = ConnectionString();
-                using(MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
-                {
-                    conn.Open(); // avataan yhteys
-                    MySqlCommand cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan
-                    using (MySqlDataReader reader = cmd.ExecuteReader()) // luodaan datanlukija
-                    {
-                        while (reader.Read())
-                        {
-                            //ORM, readerin tiedot olioon
-                            
-                        }
-                        return users;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-            
-
-        }
-        
+    {       
+        // connection string pitää muuttaa
         private static string ConnectionString()// 
         {
             string pw = "7D96QWGRw3MofzwXw7pr7Dqj6Uhvp9Hj";
             return string.Format("Data source=mysql.labranet.jamk.fi;Initial Catalog=K8936_3;user=K8936;password={0}", pw);
         }
 
+
+        // login
         public static User CheckLogin(User user)
         {
             try
@@ -85,6 +57,34 @@ namespace Dynamon_kuumalinja
             {
                 throw ex;
             }
+        }
+
+        public static List<Channel> GetChannels()// haetaan kanavat
+        {
+            try
+            {
+                List<Channel> kanavat = new List<Channel>();
+                string connstr = ConnectionString();
+                string sql = string.Format("SELECT channelID, channelName, channelPassword FROM channel"); // haet
+                using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
+                {
+                    conn.Open(); // avataan yhteys
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan
+                    using (MySqlDataReader reader = cmd.ExecuteReader()) // luodaan datanlukija
+                    {
+                        while (reader.Read())
+                        {
+                            kanavat.Add(new Channel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
+                        }
+                    }
+                }
+                return kanavat;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }           
+
         }
     }
 

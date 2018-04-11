@@ -19,13 +19,26 @@ namespace Dynamon_kuumalinja
     /// </summary>
     public partial class Chat : Window
     {
+        // fields
         private User kayttaja;
+        // constructors
         public Chat(User user)
         {
             InitializeComponent();
             kayttaja = user;
-            
+            InitChat();
         }
+        // methods
+        public void InitChat()
+        {
+            List<Channel> kuumatlinjat = new List<Channel>();
+            kuumatlinjat = ChatWindow.HaeKanavat();
+            foreach(Channel kuumalinja in kuumatlinjat)
+            {
+                libChannels.Items.Add(kuumalinja.ChannelName);
+            }
+        }
+
 
     }
 }

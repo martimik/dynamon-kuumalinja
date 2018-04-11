@@ -46,5 +46,16 @@ namespace Dynamon_kuumalinja
         public int ChannelID { get; set; }
         public string ChannelName { get; set; }
         public string ChannelPassword { get; set; }
+        //constructors
+        public Channel()
+        {
+
+        }
+        public Channel(int id, string name, string pass)
+        {
+            ChannelID = id;
+            ChannelName = name;
+            ChannelPassword = pass;
+        }
     }
 }
