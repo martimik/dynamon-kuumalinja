@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dynamon_kuumalinja.View"
         mc:Ignorable="d"
-        Title="Chat" Height="300" Width="300">
+        Title="Chat" Height="720" Width="1280">
     <Grid>
-        
+        <TextBlock x:Name="txbchatTitle" Text="Dynamon kuumalinja" FontSize="14" Margin="10,10,0,659"></TextBlock>
+        <TextBlock x:Name="txbChatWindow" Text="Viestiboksi"  HorizontalAlignment="Left" Margin="10,50,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Height="600" Width="1000"/>
+        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="1168,35,0,0" VerticalAlignment="Top" Width="70" Height="35"/>
+        <ListBox x:Name="" HorizontalAlignment="Left" Height="560" Margin="1010,90,10,10" VerticalAlignment="Top" Width="252"/>
+
     </Grid>
 </Window>
