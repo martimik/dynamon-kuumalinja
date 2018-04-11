@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace Dynamon_kuumalinja
 {
     /// <summary>
@@ -44,8 +45,17 @@ namespace Dynamon_kuumalinja
 
         private void btnLogin_Click(object sender, RoutedEventArgs e) 
         {
-            // goes to viewmodel to call databasestuff
-            txbUser.Text = txtUser.Text;
+            try
+            {
+                // goes to viewmodel to check users'n'stuff
+                Login.Kirjaudu(txtUser.Text, pwbPassword.Password);
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.Message);
+            }
+            
         }
     }
 }

@@ -7,9 +7,9 @@ using System.Windows;
 
 namespace Dynamon_kuumalinja
 {
-    class Login
+    public static class Login
     {
-        public void Kirjaudu(string username, string password)
+        public static void Kirjaudu(string username, string password)
         {
             try
             {
