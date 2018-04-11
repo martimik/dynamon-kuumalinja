@@ -19,9 +19,13 @@ namespace Dynamon_kuumalinja
     /// </summary>
     public partial class Chat : Window
     {
-        public Chat()
+        private User kayttaja;
+        public Chat(User user)
         {
             InitializeComponent();
+            kayttaja = user;
+            
         }
+
     }
 }

@@ -10,8 +10,7 @@ using MySql.Data.MySqlClient; // mysql nimiavaruus
 namespace Dynamon_kuumalinja
 {
     public static class KuumalinjaConnect
-    {
-        // KESKEN
+    {        
         public static List<User> ConnectToKuumalinja(string sql) // parametrinä välitetään sql-query
         {
             try
@@ -49,14 +48,14 @@ namespace Dynamon_kuumalinja
             return string.Format("Data source=mysql.labranet.jamk.fi;Initial Catalog=K8936_3;user=K8936;password={0}", pw);
         }
 
-        public static bool CheckLogin(string username, string password)
+        public static User CheckLogin(User user)
         {
             try
-            {
+            {                
                 // luodaan yhteys tietokantaan
                 string connstr = ConnectionString();
                 // haetaan käyttäjät
-                string sql = string.Format("SELECT username, password FROM user WHERE username = '{0}' AND password = '{1}'", username, password);
+                string sql = string.Format("SELECT userID, username, password FROM user WHERE username = '{0}' AND password = '{1}'", user.UserName, user.PassWord);
                 using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
                 {
                     conn.Open(); // avataan yhteys
@@ -66,14 +65,21 @@ namespace Dynamon_kuumalinja
                         while (reader.Read())
                         {
                             //ORM, readerin tiedot olioon
-                            if (username == reader.GetString(0) && password == reader.GetString(1))
+                            if (user.UserName == reader.GetString(1) && user.PassWord == reader.GetString(2)) // oikeat tunnukset ja salasanat
                             {
-                                return true;
+                                // otataan käyttäjän id muuttujaan
+                                var id = reader.GetValue(0);
+                                if(id != null)
+                                {
+                                    user.UserID = (int)id;// castataan id käyttäjän id:ksi
+                                }                                
+                                return user;
                             }
                         }
                     }                    
                 }
-                return false;
+                user = null;
+                return user;
             }
             catch (Exception ex)
             {

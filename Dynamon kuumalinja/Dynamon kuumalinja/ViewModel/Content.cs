@@ -12,6 +12,22 @@ namespace Dynamon_kuumalinja
         public int UserID { get; set; }
         public string UserName { get; set; } 
         public string PassWord { get; set; }
+
+        // constructors
+        public User()
+        {
+
+        }
+        public User(int id, string name)
+        {
+            UserName = name;
+            UserID = id;
+        }
+        public User(string name, string pw)
+        {
+            UserName = name;
+            PassWord = pw;
+        }
     }
 
     public class Message
