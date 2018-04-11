@@ -12,7 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace Dynamon_kuumalinja.View
+namespace Dynamon_kuumalinja
 {
     /// <summary>
     /// Interaction logic for Chat.xaml
