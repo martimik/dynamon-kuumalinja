@@ -7,10 +7,13 @@
         mc:Ignorable="d"
         Title="Chat" Height="720" Width="1280">
     <Grid>
-        <TextBlock x:Name="txbchatTitle" Text="Dynamon kuumalinja" FontSize="14" Margin="40,10,0,659"></TextBlock>
-        <TextBlock x:Name="txbChatWindow" Text="Viestiboksi"  HorizontalAlignment="Left" Margin="40,50,0,0" TextWrapping="Wrap" FontSize="16" VerticalAlignment="Top" Height="600" Width="950"/>
-        <Button x:Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Margin="1168,35,0,0" VerticalAlignment="Top" Width="70" Height="35"/>
-        <ListBox x:Name="libChannels" HorizontalAlignment="Left" HorizontalContentAlignment="Right" Height="560" Margin="990,90,30,10" VerticalAlignment="Top" Width="250"/>
-
+        <DockPanel>
+            <TextBlock x:Name="txbchatTitle" Text="Dynamon kuumalinja" DockPanel.Dock="Top" FontSize="14" Height="30" Margin="20,20,20,20"></TextBlock>
+            
+            <TextBlock x:Name="txbChatWindow" Text="Viestiboksi" DockPanel.Dock="Left" VerticalAlignment="Top" Margin="20,0,0,0" TextWrapping="Wrap" FontSize="16" Height="600" Width="950"/>
+            
+            <Button x:Name="btnLogout" Content="Logout" Margin="0,20,20,0" DockPanel.Dock="Top" HorizontalAlignment="Right" Width="70" Height="35"/>
+            <ListBox x:Name="libChannels" DockPanel.Dock="Right" HorizontalAlignment="Right" Margin="0,20,20,19" Width="250" HorizontalContentAlignment="Right"/>
+        </DockPanel>
     </Grid>
 </Window>
