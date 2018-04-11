@@ -9,7 +9,13 @@ namespace Dynamon_kuumalinja.ViewModel
     class User
     {
         // properties
-        public int userID { get; set; }
+        public int UserID { get; set; }
+        public string UserName { get; set; } 
+        public string PassWord { get; set; }
+    }
+
+    class Message
+    {
 
     }
 }
