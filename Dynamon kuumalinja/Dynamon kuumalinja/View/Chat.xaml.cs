@@ -43,7 +43,36 @@ namespace Dynamon_kuumalinja
         {
             List<Message> kuumatviestit = new List<Message>();
             kuumatviestit = ChatWindowLogic.HaeViestit(channel);
+            foreach(Message viesti in kuumatviestit)
+            {
+                TextBlock kuumaviesti = new TextBlock();
+                kuumaviesti.Height = 40;
+                kuumaviesti.Width = 300;
+                kuumaviesti.Text = string.Format("[{0}] - {1} : {2}", viesti.TimeStamp, viesti.UserID, viesti.Content);
+                txbChatWindow.Children.Add(kuumaviesti);
+            }
         }
 
+        //Events      
+
+        private void libChannels_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {
+                //Channel kanava = libChannels.SelectedItem as Channel;
+                //GetMessages(kanava);
+                //txbchatTitle.Text = kanava.ChannelID.ToString();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                
+            }
+            
+        }
+
+  
+
+       
     }
 }
