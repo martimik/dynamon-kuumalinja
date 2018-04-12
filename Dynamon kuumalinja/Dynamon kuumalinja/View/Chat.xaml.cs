@@ -38,6 +38,7 @@ namespace Dynamon_kuumalinja
 
         public void GetMessages(int channel)
         {
+            txbChatWindow.Children.Clear();
             List<Message> kuumatviestit = new List<Message>();
             kuumatviestit = ChatWindowLogic.HaeViestit(channel);
             foreach(Message viesti in kuumatviestit)
@@ -58,6 +59,7 @@ namespace Dynamon_kuumalinja
         {
             try
             {
+                txbChatWindow.Children.Clear();
                 int kanava = (int)libChannels.SelectedValue;
                 GetMessages(kanava);                
             }
@@ -66,6 +68,26 @@ namespace Dynamon_kuumalinja
                 MessageBox.Show(ex.Message);
 
             }
+        }
+
+        private void txbMessage_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.Return)
+                {
+                    txbChatWindow.Children.Clear();
+                    int kanava = (int)libChannels.SelectedValue;
+                    Message message = new Message() { ChannelID = kanava, UserID = kayttaja.UserID, Content = txbMessage.Text};                    
+                    ChatWindowLogic.ViestinLahetys(message); // lähetetään viesti                    
+                    GetMessages(kanava);// haetaan viestit uudelleen 
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);   
+            }
+            
         }
     }
 }

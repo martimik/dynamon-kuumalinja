@@ -105,7 +105,28 @@ namespace Dynamon_kuumalinja
                         }
                     }
                 }
+                messages.Reverse();
                 return messages;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        public static void SendMessage(Message message)// viestin lähetys
+        {
+            try
+            {
+                string connstr = ConnectionString();
+                string sql = string.Format("INSERT INTO message (channelID, userID, timeStamp, content) VALUES ({0}, {1}, NOW(), '{2}')", message.ChannelID, message.UserID, message.Content);
+                using(MySqlConnection conn = new MySqlConnection(connstr))
+                {
+                    conn.Open(); // avataan yhteys
+                    MySqlCommand cmd = conn.CreateCommand();// luodaan komento yhteyteen
+                    cmd.CommandText = sql; // sql insert lause
+                    cmd.ExecuteNonQuery(); // ajetaan sql lause                    
+                }
             }
             catch (Exception ex)
             {
