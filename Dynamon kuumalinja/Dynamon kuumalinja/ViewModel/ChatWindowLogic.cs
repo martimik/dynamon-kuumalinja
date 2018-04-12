@@ -38,5 +38,18 @@ namespace Dynamon_kuumalinja
             }
         }
 
+        public static void ViestinLahetys(Message viesti)
+        {
+            try
+            {
+                KuumalinjaConnect.SendMessage(viesti);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            
+        }
+
     }
 }

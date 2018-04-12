@@ -9,7 +9,7 @@
     <Grid>
         <DockPanel>
             <TextBlock x:Name="txbchatTitle" Text="Dynamon kuumalinja" DockPanel.Dock="Top" FontSize="14" Height="30" Margin="20,20,20,20"></TextBlock>
-            <TextBox x:Name="txbMessage" Text="Send message" DockPanel.Dock="Bottom" Height="30" Width="950" HorizontalAlignment="Left" Margin="20,20,20,20"></TextBox>
+            <TextBox x:Name="txbMessage" Text="Send message" DockPanel.Dock="Bottom" Height="30" Width="950" HorizontalAlignment="Left" Margin="20,20,20,20" KeyDown="txbMessage_KeyDown"></TextBox>
             <StackPanel  x:Name="txbChatWindow" DockPanel.Dock="Left" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="20,0,0,0" Height="550" Width="950">
 
             </StackPanel>
