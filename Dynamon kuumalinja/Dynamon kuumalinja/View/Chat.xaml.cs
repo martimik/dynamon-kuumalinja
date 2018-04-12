@@ -44,8 +44,8 @@ namespace Dynamon_kuumalinja
             foreach(Message viesti in kuumatviestit)
             {
                 TextBlock kuumaviesti = new TextBlock();
-                kuumaviesti.Height = 40;
-                kuumaviesti.Width = 300;
+                kuumaviesti.Height = 20;
+                kuumaviesti.Width = 500;
                 kuumaviesti.Text = string.Format("[{0}] - {1} : {2}", viesti.TimeStamp, viesti.UserName, viesti.Content);
                 txbChatWindow.Children.Add(kuumaviesti);
             }
