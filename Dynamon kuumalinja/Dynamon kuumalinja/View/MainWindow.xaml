@@ -10,9 +10,9 @@
         <StackPanel>
             <TextBlock x:Name="txbTitle" Text="Dynamon Kuumalinja" TextAlignment="Center" Margin="0,200,0,0" FontSize="20"></TextBlock>
             <TextBlock x:Name="txbUser" Text="Username" TextAlignment="Center" Margin="0,20,0,0" FontSize="14"></TextBlock>
-            <TextBox x:Name="txtUser" KeyDown="txtUser_KeyDown" Width="200"  Margin="200,5,200,0" HorizontalContentAlignment="Stretch"/>
+            <TextBox x:Name="txtUser" KeyDown="txtUser_KeyDown" Text="Username" FontStyle="Italic" Width="200"  Margin="200,5,200,0" HorizontalContentAlignment="Center"/>
             <TextBlock x:Name="txbPassword" Text="Password" TextAlignment="Center" Margin="0,10,0,0" FontSize="14"></TextBlock>
-            <PasswordBox x:Name="pwbPassword" KeyDown="pwbPassword_KeyDown" Width="200" Margin="200,5,200,0" HorizontalContentAlignment="Stretch"></PasswordBox>
+            <PasswordBox x:Name="pwbPassword" KeyDown="pwbPassword_KeyDown" Width="200" Margin="200,5,200,0" HorizontalContentAlignment="Stretch" PasswordChanged="passwordChanged"></PasswordBox>
             <Button x:Name="btnLogin" Content="Kirjaudu" Click="btnLogin_Click" Width="100" Margin="250,20,250,0" />
         </StackPanel>
     </Grid>
