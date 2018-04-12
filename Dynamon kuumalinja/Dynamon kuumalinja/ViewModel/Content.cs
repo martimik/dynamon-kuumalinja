@@ -30,12 +30,13 @@ namespace Dynamon_kuumalinja
         }
     }
 
-    public class Message
+    public class Message 
     {
         // properties
         public int MessageID { get; set; }
         public int ChannelID { get; set; }
         public int UserID { get; set; }
+        public string UserName { get; set; }
         public string TimeStamp { get; set; }
         public string Content { get; set; }
         //constructors

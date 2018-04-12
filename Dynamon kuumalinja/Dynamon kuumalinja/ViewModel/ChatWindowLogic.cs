@@ -24,7 +24,7 @@ namespace Dynamon_kuumalinja
             }            
         }
         
-        public static List<Message> HaeViestit(Channel channel)
+        public static List<Message> HaeViestit(int channel)
         {
             try
             {

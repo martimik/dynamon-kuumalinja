@@ -86,13 +86,13 @@ namespace Dynamon_kuumalinja
             }
         }
 
-        public static List<Message> GetMessages(Channel kanava)
+        public static List<Message> GetMessages(int kanava)
         {
             try
             {
                 List<Message> messages = new List<Message>();
                 string connstr = ConnectionString();
-                string sql = string.Format("SELECT message.timeStamp, user.userID, message.content FROM message JOIN user ON message.userID = user.userID WHERE channelID = {0}", kanava.ChannelID);
+                string sql = string.Format("SELECT message.timeStamp, user.username, message.content FROM message JOIN user ON message.userID = user.userID WHERE channelID = {0}", kanava);
                 using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
                 {
                     conn.Open(); // avataan yhteys
@@ -101,7 +101,7 @@ namespace Dynamon_kuumalinja
                     {
                         while (reader.Read())
                         {
-                            messages.Add(new Message(reader.GetString(1), reader.GetInt32(0), reader.GetString(2)));
+                            messages.Add(new Message() { TimeStamp = reader.GetString(0), UserName = reader.GetString(1), Content = reader.GetString(2) });
                         }
                     }
                 }

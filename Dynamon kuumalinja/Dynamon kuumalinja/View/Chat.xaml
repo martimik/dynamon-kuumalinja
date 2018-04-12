@@ -17,7 +17,7 @@
                 <Button x:Name="btnLogout" Content="Logout" DockPanel.Dock="Right" Margin="0,0,0,0" Width="70" Height="35"/>
                 <Button x:Name="btnRefresh" Content="Refresh" DockPanel.Dock="Right" Margin="70,0,0,0" Width="70" Height="35"/>
             </DockPanel>
-            <ListBox x:Name="libChannels" DockPanel.Dock="Right" ItemsSource="{Binding}" DisplayMemberPath="ChannelName" SelectedValuePath="ChannelID" HorizontalAlignment="Right" Margin="20,20,20,20" Width="250" Height="450" HorizontalContentAlignment="Right"/>
+            <ListBox x:Name="libChannels" DockPanel.Dock="Right" ItemsSource="{Binding}" DisplayMemberPath="ChannelName" SelectedValuePath="ChannelID" HorizontalAlignment="Right" Margin="20,20,20,20" Width="250" Height="450" HorizontalContentAlignment="Right" MouseDoubleClick="libChannels_MouseDoubleClick"/>
         </DockPanel>
     </Grid>
 </Window>

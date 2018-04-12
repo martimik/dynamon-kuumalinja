@@ -36,7 +36,7 @@ namespace Dynamon_kuumalinja
             
         }
 
-        public void GetMessages(Channel channel)
+        public void GetMessages(int channel)
         {
             List<Message> kuumatviestit = new List<Message>();
             kuumatviestit = ChatWindowLogic.HaeViestit(channel);
@@ -45,31 +45,27 @@ namespace Dynamon_kuumalinja
                 TextBlock kuumaviesti = new TextBlock();
                 kuumaviesti.Height = 40;
                 kuumaviesti.Width = 300;
-                kuumaviesti.Text = string.Format("[{0}] - {1} : {2}", viesti.TimeStamp, viesti.UserID, viesti.Content);
+                kuumaviesti.Text = string.Format("[{0}] - {1} : {2}", viesti.TimeStamp, viesti.UserName, viesti.Content);
                 txbChatWindow.Children.Add(kuumaviesti);
             }
         }
 
         //Events      
 
-        private void libChannels_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+       
+
+        private void libChannels_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             try
             {
-                //Channel kanava = libChannels.SelectedItem as Channel;
-                //GetMessages(kanava);
-                //txbchatTitle.Text = kanava.ChannelID.ToString();
+                int kanava = (int)libChannels.SelectedValue;
+                GetMessages(kanava);                
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-                
+
             }
-            
         }
-
-  
-
-       
     }
 }
