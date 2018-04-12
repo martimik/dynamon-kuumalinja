@@ -31,12 +31,9 @@ namespace Dynamon_kuumalinja
         // methods
         public void InitChat()
         {
-            List<Channel> kuumatlinjat = new List<Channel>();
-            kuumatlinjat = ChatWindowLogic.HaeKanavat();
-            foreach(Channel kuumalinja in kuumatlinjat)
-            {
-                libChannels.Items.Add(kuumalinja.ChannelName);
-            }
+            //List<Channel> kuumatlinjat = new List<Channel>();
+            libChannels.ItemsSource = ChatWindowLogic.HaeKanavat();
+            
         }
 
         public void GetMessages(Channel channel)

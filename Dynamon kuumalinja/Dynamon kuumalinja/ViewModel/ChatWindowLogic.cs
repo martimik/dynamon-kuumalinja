@@ -10,12 +10,12 @@ namespace Dynamon_kuumalinja
     public static class ChatWindowLogic
     {
 
-        public static List<Channel> HaeKanavat()
+        public static List<Channel> HaeKanavat()// haetaan kanavat
         {
             try
             {
                 List<Channel> channels = new List<Channel>();
-                channels = KuumalinjaConnect.GetChannels();            
+                channels = KuumalinjaConnect.GetChannels(); // kutsutaan tietokantaan yhdistämistä     
                 return channels;
             }
             catch (Exception ex)

@@ -70,6 +70,11 @@ namespace Dynamon_kuumalinja
         {
 
         }
+        public Channel(int id, string name)
+        {
+            ChannelID = id;
+            ChannelName = name;
+        }
         public Channel(int id, string name, string pass)
         {
             ChannelID = id;
