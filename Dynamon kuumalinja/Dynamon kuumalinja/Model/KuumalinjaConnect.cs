@@ -7,6 +7,7 @@ using MySql.Data;// mysql nimiavaruus
 using MySql.Data.MySqlClient; // mysql nimiavaruus
 using System.Configuration;
 using System.Security.Cryptography;
+using System.Windows;
 
 namespace Dynamon_kuumalinja
 {
@@ -15,13 +16,57 @@ namespace Dynamon_kuumalinja
         // connection string pitää muuttaa
         private static string ConnectionString()// 
         {
-            //SHA256 test = SHA256Managed.Create();
+
             //string pw = "7D96QWGRw3MofzwXw7pr7Dqj6Uhvp9Hj";       
+
+            string pw = "";
             
-            string pw = ConfigurationManager.AppSettings["Password"];
+            if (ConfigurationManager.AppSettings["hash"] == "false")// hash logiikka
+            {
+                pw = ConfigurationManager.AppSettings["Password"];                              
+                Configuration configuration = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None);
+                configuration.AppSettings.Settings["hash"].Value = "true";// asetetaan hashays todeksi
+                configuration.AppSettings.Settings["Password"].Value = EncryptPass(ConfigurationManager.AppSettings["Password"]);
+                configuration.Save();
+                ConfigurationManager.RefreshSection("appSettings");
+            }
+            else if(ConfigurationManager.AppSettings["hash"] == "true")
+            {
+                pw = DecryptPass(ConfigurationManager.AppSettings["Password"]);
+            }
+
+
             return string.Format("Data source=mysql.labranet.jamk.fi;Initial Catalog=K8936_3;user=K8936;password={0}", pw);            
         }
+        #region hash      
 
+        private static string EncryptPass(string pass)
+        {            
+            char[] charhash = pass.ToCharArray();
+            pass = "";
+            for (int i = 0; i < charhash.Length; i++)
+            {
+                int no = Convert.ToInt32(charhash[i]) + 10;
+                string r = Convert.ToChar(no).ToString();
+                pass += r;
+            }
+            return pass;            
+        }
+
+        private static string DecryptPass(string pass)
+        {
+            
+            char[] readChar = pass.ToCharArray();
+            pass = "";
+            for (int i = 0; i < readChar.Length; i++)
+            {
+                int no = Convert.ToInt32(readChar[i]) - 10;
+                string r = Convert.ToChar(no).ToString();
+                pass += r;
+            }
+            return pass;
+        }
+        #endregion
         #region Login
         /*
          *
