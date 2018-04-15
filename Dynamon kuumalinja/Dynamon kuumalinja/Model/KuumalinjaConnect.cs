@@ -31,11 +31,13 @@ namespace Dynamon_kuumalinja
                 // luodaan yhteys tietokantaan
                 string connstr = ConnectionString();
                 // haetaan käyttäjät
-                string sql = string.Format("SELECT userID, username, password FROM user WHERE username = '{0}' AND password = '{1}'", user.UserName, user.PassWord);
+                string sql = string.Format("SELECT userID, username, password FROM user WHERE username = @username AND password = @password");
                 using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
                 {
                     conn.Open(); // avataan yhteys
                     MySqlCommand cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan
+                    cmd.Parameters.AddWithValue("@username", user.UserName);
+                    cmd.Parameters.AddWithValue("@password", user.PassWord);
                     using (MySqlDataReader reader = cmd.ExecuteReader()) // luodaan datanlukija
                     {
                         while (reader.Read())
@@ -77,7 +79,7 @@ namespace Dynamon_kuumalinja
             {
                 List<Channel> kanavat = new List<Channel>();
                 string connstr = ConnectionString();
-                string sql = string.Format("SELECT channelID, channelName FROM channel"); // haet
+                string sql = string.Format("SELECT channelID, channelName FROM channel"); 
                 using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
                 {
                     conn.Open(); // avataan yhteys
@@ -103,11 +105,13 @@ namespace Dynamon_kuumalinja
             try
             {
                 string connstr = ConnectionString();
-                string sql = string.Format("SELECT channelPassword FROM channel WHERE channelID = '{0}'", kanava);
+                string sql = string.Format("SELECT channelPassword FROM channel WHERE channelID = @channel");
+                
                 using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
                 {
                     conn.Open(); // avataan yhteys
                     MySqlCommand cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan
+                    cmd.Parameters.AddWithValue("@channel", kanava);
                     using (MySqlDataReader reader = cmd.ExecuteReader()) // luodaan datanlukija
                     {
                         while (reader.Read())
@@ -141,11 +145,12 @@ namespace Dynamon_kuumalinja
             {
                 List<Message> messages = new List<Message>();
                 string connstr = ConnectionString();
-                string sql = string.Format("SELECT message.timeStamp, user.username, message.content FROM message JOIN user ON message.userID = user.userID WHERE channelID = {0}", kanava);
+                string sql = string.Format("SELECT message.timeStamp, user.username, message.content FROM message JOIN user ON message.userID = user.userID WHERE channelID = @channel");
                 using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
                 {
                     conn.Open(); // avataan yhteys
                     MySqlCommand cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan
+                    cmd.Parameters.AddWithValue("@channel", kanava);
                     using (MySqlDataReader reader = cmd.ExecuteReader()) // luodaan datanlukija
                     {
                         while (reader.Read())
@@ -168,11 +173,14 @@ namespace Dynamon_kuumalinja
             try
             {
                 string connstr = ConnectionString();
-                string sql = string.Format("INSERT INTO message (channelID, userID, timeStamp, content) VALUES ({0}, {1}, NOW(), '{2}')", message.ChannelID, message.UserID, message.Content);
+                string sql = string.Format("INSERT INTO message (channelID, userID, timeStamp, content) VALUES (@channel, @userid, NOW(), @content)");
                 using(MySqlConnection conn = new MySqlConnection(connstr))
                 {
                     conn.Open(); // avataan yhteys
                     MySqlCommand cmd = conn.CreateCommand();// luodaan komento yhteyteen
+                    cmd.Parameters.AddWithValue("@channel", message.ChannelID);
+                    cmd.Parameters.AddWithValue("@userid", message.UserID);
+                    cmd.Parameters.AddWithValue("@content", message.Content);
                     cmd.CommandText = sql; // sql insert lause
                     cmd.ExecuteNonQuery(); // ajetaan sql lause                    
                 }

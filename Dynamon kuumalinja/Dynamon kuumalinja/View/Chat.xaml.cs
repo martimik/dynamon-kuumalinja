@@ -63,7 +63,7 @@ namespace Dynamon_kuumalinja
                 txbChatWindow.Children.Clear();
                 int kanava = (int)libChannels.SelectedValue;
                 // avataan kanavan tooltip ja kysytään salasanaa
-                //GetMessages(kanava);// jos salasana on oikein, päästään sisään
+                GetMessages(kanava);// jos salasana on oikein, päästään sisään
                 // muuten virheviesti
             }
             catch (Exception ex)

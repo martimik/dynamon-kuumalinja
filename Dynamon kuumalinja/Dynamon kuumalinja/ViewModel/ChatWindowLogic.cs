@@ -10,6 +10,7 @@ namespace Dynamon_kuumalinja
     public static class ChatWindowLogic
     {
 
+        #region Channels
         public static List<Channel> HaeKanavat()// haetaan kanavat
         {
             try
@@ -24,7 +25,29 @@ namespace Dynamon_kuumalinja
                 throw ex;
             }            
         }
-        
+
+        public static void CheckChannelPassword(int kanava, string password)
+        {
+            try
+            {
+                if (KuumalinjaConnect.CheckChannelPassword(kanava, password))
+                {
+                    // jos salasana on ok, haetaan kanavan viestit
+                    HaeViestit(kanava);
+                }
+                else
+                {
+                    // virheviesti tooltippiin
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        #endregion
+        #region Messages
         public static List<Message> HaeViestit(int channel)// haetaan kanavan viestit
         {
             try
@@ -51,27 +74,6 @@ namespace Dynamon_kuumalinja
             }
             
         }
-
-        public static void CheckChannelPassword(int kanava, string password)
-        {
-            try
-            {
-                if (KuumalinjaConnect.CheckChannelPassword(kanava, password))
-                {
-                    // jos salasana on ok, haetaan kanavan viestit
-                    HaeViestit(kanava);
-                }
-                else
-                {
-                    // virheviesti tooltippiin
-                }
-
-            }
-            catch (Exception ex)
-            {
-                throw ex;
-            }
-
-        }
+        #endregion
     }
 }
