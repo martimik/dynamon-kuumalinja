@@ -5,10 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dynamon_kuumalinja"
         mc:Ignorable="d"
-        Title="Chat" Height="720" Width="1280">
+        Title="Chat" Height="720" Width="1280" FontFamily="Calibri">
     <Grid>
         <DockPanel>
-            <TextBlock x:Name="txbchatTitle" Text="Dynamon kuumalinja" DockPanel.Dock="Top" FontSize="18" Height="30" Margin="20,20,20,20"></TextBlock>
+            <Grid DockPanel.Dock="Top" Height="50" Margin="0,0,0,20" Background="#FF00497D">
+                <TextBlock x:Name="txbchatTitle" Text="Dynamon kuumalinja" FontSize="18" Height="30" Foreground="White" VerticalAlignment="Center" Margin="20,0,20,0"></TextBlock>
+            </Grid>
             <TextBox x:Name="txbMessage" Text="Send message" FontSize="16" DockPanel.Dock="Bottom" Height="30" HorizontalAlignment="Left" Margin="20,20,20,20" KeyDown="txbMessage_KeyDown" VerticalContentAlignment="Center" Padding="10,0,0,0" Width="{Binding ActualWidth, ElementName=txbChatWindow, Mode=OneWay}">
                 <TextBox.Resources>
                     <Style TargetType="{x:Type Border}">
