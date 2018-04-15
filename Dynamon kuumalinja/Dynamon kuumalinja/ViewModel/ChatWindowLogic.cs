@@ -15,7 +15,8 @@ namespace Dynamon_kuumalinja
             try
             {
                 List<Channel> channels = new List<Channel>();
-                channels = KuumalinjaConnect.GetChannels(); // kutsutaan tietokantaan yhdistämistä     
+                channels = KuumalinjaConnect.GetChannels(); // haetaan kanavat
+                
                 return channels;
             }
             catch (Exception ex)
@@ -24,12 +25,12 @@ namespace Dynamon_kuumalinja
             }            
         }
         
-        public static List<Message> HaeViestit(int channel)
+        public static List<Message> HaeViestit(int channel)// haetaan kanavan viestit
         {
             try
             {
                 List<Message> messages = new List<Message>();
-                messages = KuumalinjaConnect.GetMessages(channel);
+                messages = KuumalinjaConnect.GetMessages(channel); // hakee viestit tietokannasta
                 return messages;
             }
             catch (Exception ex)
@@ -38,7 +39,7 @@ namespace Dynamon_kuumalinja
             }
         }
 
-        public static void ViestinLahetys(Message viesti)
+        public static void ViestinLahetys(Message viesti) // lähetetään viesti
         {
             try
             {
@@ -51,5 +52,26 @@ namespace Dynamon_kuumalinja
             
         }
 
+        public static void CheckChannelPassword(int kanava, string password)
+        {
+            try
+            {
+                if (KuumalinjaConnect.CheckChannelPassword(kanava, password))
+                {
+                    // jos salasana on ok, haetaan kanavan viestit
+                    HaeViestit(kanava);
+                }
+                else
+                {
+                    // virheviesti tooltippiin
+                }
+
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+
+        }
     }
 }

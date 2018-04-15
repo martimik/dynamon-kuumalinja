@@ -18,8 +18,12 @@ namespace Dynamon_kuumalinja
             return string.Format("Data source=mysql.labranet.jamk.fi;Initial Catalog=K8936_3;user=K8936;password={0}", pw);
         }
 
-
-        // login
+        #region Login
+        /*
+         *
+         * Login    
+         *   
+         */
         public static User CheckLogin(User user)
         {
             try
@@ -58,6 +62,14 @@ namespace Dynamon_kuumalinja
                 throw ex;
             }
         }
+        #endregion 
+        #region Channels
+        /*
+         *
+         * Channels    
+         *   
+         */
+
 
         public static List<Channel> GetChannels()// haetaan kanavat
         {
@@ -65,7 +77,7 @@ namespace Dynamon_kuumalinja
             {
                 List<Channel> kanavat = new List<Channel>();
                 string connstr = ConnectionString();
-                string sql = string.Format("SELECT channelID, channelName, channelPassword FROM channel"); // haet
+                string sql = string.Format("SELECT channelID, channelName FROM channel"); // haet
                 using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
                 {
                     conn.Open(); // avataan yhteys
@@ -74,7 +86,7 @@ namespace Dynamon_kuumalinja
                     {
                         while (reader.Read())
                         {
-                            kanavat.Add(new Channel(reader.GetInt32(0), reader.GetString(1), reader.GetString(2)));
+                            kanavat.Add(new Channel() { ChannelID = reader.GetInt32(0), ChannelName = reader.GetString(1) });
                         }
                     }
                 }
@@ -85,6 +97,43 @@ namespace Dynamon_kuumalinja
                 throw ex;
             }
         }
+
+        public static bool CheckChannelPassword(int kanava, string pw)// kanavan salasanan tarkistus
+        {
+            try
+            {
+                string connstr = ConnectionString();
+                string sql = string.Format("SELECT channelPassword FROM channel WHERE channelID = '{0}'", kanava);
+                using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
+                {
+                    conn.Open(); // avataan yhteys
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan
+                    using (MySqlDataReader reader = cmd.ExecuteReader()) // luodaan datanlukija
+                    {
+                        while (reader.Read())
+                        {
+                            if(pw == reader.GetString(0))// jos syötetty salasana on sama kuin tietokannassa oleva, palautetaan truena
+                            {
+                                return true;
+                            }                            
+                        }
+                    }
+                }
+                return false; // jos rivit ei matchaa niin false
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+
+        #endregion
+        #region Messages
+        /*
+         *
+         * Messages
+         *   
+         */
 
         public static List<Message> GetMessages(int kanava)
         {
@@ -133,6 +182,7 @@ namespace Dynamon_kuumalinja
                 throw ex;
             }
         }
+#endregion
     }
 
 }

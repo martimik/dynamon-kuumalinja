@@ -25,13 +25,14 @@ namespace Dynamon_kuumalinja
         public Chat(User user)
         {
             InitializeComponent();
-            kayttaja = user;
+            kayttaja = user; // joudutaan linkittämään muuttujaan, jotta saadaan käyttäjä välitettyä luokan sisässä oleville metodeille
+            user = null;
             InitChat();
         }
         // methods
         public void InitChat()
         {
-            //List<Channel> kuumatlinjat = new List<Channel>();
+            //bindingin kautta linkitetään setit
             libChannels.ItemsSource = ChatWindowLogic.HaeKanavat();
             
         }
@@ -61,12 +62,13 @@ namespace Dynamon_kuumalinja
             {
                 txbChatWindow.Children.Clear();
                 int kanava = (int)libChannels.SelectedValue;
-                GetMessages(kanava);                
+                // avataan kanavan tooltip ja kysytään salasanaa
+                //GetMessages(kanava);// jos salasana on oikein, päästään sisään
+                // muuten virheviesti
             }
             catch (Exception ex)
             {
                 MessageBox.Show(ex.Message);
-
             }
         }
 
@@ -76,7 +78,7 @@ namespace Dynamon_kuumalinja
             {
                 if (e.Key == Key.Return)
                 {
-                    txbChatWindow.Children.Clear();
+                    txbChatWindow.Children.Clear(); // tyhjentää chatti ikkunan
                     int kanava = (int)libChannels.SelectedValue;
                     Message message = new Message() { ChannelID = kanava, UserID = kayttaja.UserID, Content = txbMessage.Text};                    
                     ChatWindowLogic.ViestinLahetys(message); // lähetetään viesti                    

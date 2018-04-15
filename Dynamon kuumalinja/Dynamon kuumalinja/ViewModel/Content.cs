@@ -65,7 +65,7 @@ namespace Dynamon_kuumalinja
         // properties
         public int ChannelID { get; set; }
         public string ChannelName { get; set; }
-        public string ChannelPassword { get; set; }
+        
         //constructors
         public Channel()
         {
@@ -79,8 +79,7 @@ namespace Dynamon_kuumalinja
         public Channel(int id, string name, string pass)
         {
             ChannelID = id;
-            ChannelName = name;
-            ChannelPassword = pass;
+            ChannelName = name;            
         }
     }
 }
