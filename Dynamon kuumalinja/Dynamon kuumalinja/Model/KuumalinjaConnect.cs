@@ -5,7 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using MySql.Data;// mysql nimiavaruus
 using MySql.Data.MySqlClient; // mysql nimiavaruus
-
+using System.Configuration;
+using System.Security.Cryptography;
 
 namespace Dynamon_kuumalinja
 {
@@ -14,8 +15,11 @@ namespace Dynamon_kuumalinja
         // connection string pitää muuttaa
         private static string ConnectionString()// 
         {
-            string pw = "7D96QWGRw3MofzwXw7pr7Dqj6Uhvp9Hj";
-            return string.Format("Data source=mysql.labranet.jamk.fi;Initial Catalog=K8936_3;user=K8936;password={0}", pw);
+            //SHA256 test = SHA256Managed.Create();
+            //string pw = "7D96QWGRw3MofzwXw7pr7Dqj6Uhvp9Hj";       
+            
+            string pw = ConfigurationManager.AppSettings["Password"];
+            return string.Format("Data source=mysql.labranet.jamk.fi;Initial Catalog=K8936_3;user=K8936;password={0}", pw);            
         }
 
         #region Login
