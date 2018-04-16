@@ -26,18 +26,19 @@ namespace Dynamon_kuumalinja
             }            
         }
 
-        public static void CheckChannelPassword(int kanava, string password)
+        public static bool CheckChannelPassword(int kanava, string password)
         {
             try
             {
                 if (KuumalinjaConnect.CheckChannelPassword(kanava, password))
                 {
                     // jos salasana on ok, haetaan kanavan viestit
-                    HaeViestit(kanava);
+                    return true;                    
                 }
                 else
                 {
                     // virheviesti tooltippiin
+                    return false;
                 }
 
             }

@@ -22,6 +22,7 @@ namespace Dynamon_kuumalinja
         // fields
         private User kayttaja;
         // constructors
+#region Initialize
         public Chat(User user)
         {
             InitializeComponent();
@@ -34,15 +35,28 @@ namespace Dynamon_kuumalinja
         {
             //bindingin kautta linkitetään setit
             libChannels.ItemsSource = ChatWindowLogic.HaeKanavat();
-            
+        }
+        #endregion
+        #region Passwordprompt
+        
+        private void ShowChannelPrompt() // swaps chat to password prompt
+        {
+            TextBlock password = new TextBlock();// luodaan 
+            password.Text = "Password:";
+            PasswordBox pass = new PasswordBox();
+            pass.Name = "pwbPass";
+            pass.KeyDown += new KeyEventHandler(pwbPass_KeyDown);
+            txbChatWindow.Children.Clear();
+            txbChatWindow.Children.Add(password);
+            txbChatWindow.Children.Add(pass);
         }
 
-        public void GetMessages(int channel)
+       public void GetMessages(int channel)
         {
             txbChatWindow.Children.Clear();
             List<Message> kuumatviestit = new List<Message>();
             kuumatviestit = ChatWindowLogic.HaeViestit(channel);
-            foreach(Message viesti in kuumatviestit)
+            foreach (Message viesti in kuumatviestit)
             {
                 TextBlock kuumaviesti = new TextBlock();
                 kuumaviesti.Height = 20;
@@ -53,27 +67,9 @@ namespace Dynamon_kuumalinja
                 txbChatWindow.Children.Add(kuumaviesti);
             }
         }
-
-        //Events      
-
-       
-
-        private void libChannels_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                txbChatWindow.Children.Clear();
-                int kanava = (int)libChannels.SelectedValue;
-                // avataan kanavan tooltip ja kysytään salasanaa
-                GetMessages(kanava);// jos salasana on oikein, päästään sisään
-                // muuten virheviesti
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-        }
-
+        #endregion
+        #region Events
+        //Events
         private void txbMessage_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -82,16 +78,60 @@ namespace Dynamon_kuumalinja
                 {
                     txbChatWindow.Children.Clear(); // tyhjentää chatti ikkunan
                     int kanava = (int)libChannels.SelectedValue;
-                    Message message = new Message() { ChannelID = kanava, UserID = kayttaja.UserID, Content = txbMessage.Text};                    
+                    Message message = new Message() { ChannelID = kanava, UserID = kayttaja.UserID, Content = txbMessage.Text };
                     ChatWindowLogic.ViestinLahetys(message); // lähetetään viesti                    
                     GetMessages(kanava);// haetaan viestit uudelleen 
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message);   
+                MessageBox.Show(ex.Message);
             }
-            
+
+        }      
+        private void pwbPass_KeyDown(object sender, KeyEventArgs e)
+        {
+            try
+            {
+                if (e.Key == Key.Return)
+                {
+                    string password = "";
+                    txbChatWindow.Children.Clear(); // tyhjentää chatti ikkunan
+                    int kanava = (int)libChannels.SelectedValue;
+                    if(sender is PasswordBox)// castataan lähettäjä
+                    {
+                        PasswordBox pass;
+                        pass = (PasswordBox)sender;
+                        password = pass.Password;
+                    }                    
+                    if(ChatWindowLogic.CheckChannelPassword(kanava, password)) // lähetetään viesti                    
+                    {
+                        GetMessages(kanava);// haetaan viestit uudelleen
+                    }
+                    else
+                    {
+                        MessageBox.Show("Wrong Password");
+                    } 
+                        
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
+        private void libChannels_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            try
+            {                
+                ShowChannelPrompt();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
+        #endregion        
     }
 }

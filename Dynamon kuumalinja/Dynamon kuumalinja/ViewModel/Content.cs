@@ -65,7 +65,7 @@ namespace Dynamon_kuumalinja
         // properties
         public int ChannelID { get; set; }
         public string ChannelName { get; set; }
-        
+
         //constructors
         public Channel()
         {

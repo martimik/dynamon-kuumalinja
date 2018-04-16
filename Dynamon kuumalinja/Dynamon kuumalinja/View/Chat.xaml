@@ -27,14 +27,14 @@
                     </Button>
                     <Button x:Name="btnRefresh" Content="Refresh" DockPanel.Dock="Right" Margin="0,0,0,0" Width="70" Height="35" FontSize="14"/>
                 </DockPanel>
-                
+
                 <ListBox x:Name="libChannels" ItemsSource="{Binding}" DisplayMemberPath="ChannelName" SelectedValuePath="ChannelID" DockPanel.Dock="Bottom" Margin="0,0,0,0" Width="250" HorizontalContentAlignment="Right" FontSize="16" MouseDoubleClick="libChannels_MouseDoubleClick" UseLayoutRounding="False">
                     <ListBox.Resources>
                         <Style TargetType="Border">
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </ListBox.Resources>
-                </ListBox>
+                </ListBox>                
             </DockPanel>
             
             <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="5" Margin="20,0,0,0">
@@ -44,5 +44,6 @@
             </Border>
             
         </DockPanel>
+        
     </Grid>
 </Window>
