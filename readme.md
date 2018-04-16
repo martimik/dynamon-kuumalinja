@@ -69,24 +69,26 @@ Yhdessä:
 
 - Viikko 1 Suunnittelu, hahmotus (tietokannan rakenne)
 - Viikko 2 Prototyypin teko (Mockupien perusteella), hakujen luonti hahmotus
-	- Viikko 2 Koodin hionta
-- Viikko 3 Koodin viimeistely
+- Viikko 3 Koodin teko
+- Viikko 4 Koodin hionta (viimeisten ominaisuuksien luonti)
 
 
 ## TO-DO
 
+- Viestinlähetyksen piilotus/paljastus, kun käyttäjä kirjautuu sisään kanavalle/vaihtaa kanavaa
+- Kanavien salasanojen promptin ulkonäkö
 - Registerin teko (integroidaanko loginiin, jos ei ole tunnuksia niin luodaan, vaatii pientä mietintää)
-- Tooltip kanavien listbox hoveriin
-- Kanavan tuplaklikkaukseen salasanan prompti
-- sql lauseiden muuttujien muuntaminen parametreiksi (sql- injektioiden estoa)
 - encryptaus salasanoille (md5 tietokannoissa, mutta ei ole turvallinen)
+- tietokanta palvelimen muunto app.config tiedostoon ja sen encryptaus // jos tehdään
 
-- tietokanta palvelimen muunto app.config tiedostoon ja sen encryptaus
-- tietokannan salasanan muunto app.config tiedostoon ja sen encryptaus
-- 
 
 
 ## Done
+
+- suunnittelu
+- tietokannan salasanan muunto app.config tiedostoon ja sen encryptaus
+- sql lauseiden muuttujien muuntaminen parametreiksi (sql- injektioiden estoa)
+- Kanavien salasanojen prompti
 - dialogiboxi väärillä tunnuksilla tapahtuvalle kirjautumisyritykselle
 - Chat ikkuna
 - ER-kaavio
