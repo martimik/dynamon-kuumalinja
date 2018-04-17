@@ -18,7 +18,7 @@
                     </Style>
                 </TextBox.Resources>
             </TextBox>
-            
+
             <DockPanel DockPanel.Dock="Right" Margin="0,0,20,0" Width="280">
                 <DockPanel Height="40" Width="250" DockPanel.Dock="Top" Margin="0,0,0,20">
                     <Button x:Name="btnLogout" Content="Logout" DockPanel.Dock="Right" Margin="0,0,0,0" Width="70" Height="35" FontSize="14"/>
@@ -34,16 +34,15 @@
                             <Setter Property="CornerRadius" Value="5"/>
                         </Style>
                     </ListBox.Resources>
-                </ListBox>                
+                </ListBox>
             </DockPanel>
-            
+
             <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="5" Margin="20,0,0,0">
                 <StackPanel  x:Name="txbChatWindow" DockPanel.Dock="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="550">
                     <TextBlock x:Name="txbChatPlaceholder" Text="No Messages, Select Channel" Margin="5,0,0,0" FontSize="16" HorizontalAlignment="Left"></TextBlock>
                 </StackPanel>
             </Border>
-            
+
         </DockPanel>
-        
     </Grid>
 </Window>
