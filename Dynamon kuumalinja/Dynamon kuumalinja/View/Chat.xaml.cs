@@ -42,8 +42,17 @@ namespace Dynamon_kuumalinja
         private void ShowChannelPrompt() // swaps chat to password prompt
         {
             TextBlock password = new TextBlock();// luodaan 
-            password.Text = "Password:";
+            password.Height = 30;
+            password.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            password.Margin = new Thickness(0, 20, 0, 10);
+            password.FontSize = 18;
+            password.Text = "Channel Password:";
             PasswordBox pass = new PasswordBox();
+            pass.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            pass.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            pass.Height = 25;
+            pass.Width = 200;
+            pass.FontSize = 16;
             pass.Name = "pwbPass";
             pass.KeyDown += new KeyEventHandler(pwbPass_KeyDown);
             txbChatWindow.Children.Clear();
