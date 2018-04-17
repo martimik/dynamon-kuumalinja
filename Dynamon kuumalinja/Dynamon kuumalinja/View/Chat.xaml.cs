@@ -90,6 +90,7 @@ namespace Dynamon_kuumalinja
                     Message message = new Message() { ChannelID = kanava, UserID = kayttaja.UserID, Content = txbMessage.Text };
                     ChatWindowLogic.ViestinLahetys(message); // lähetetään viesti                    
                     GetMessages(kanava);// haetaan viestit uudelleen 
+                    txbMessage.Text = "";
                 }
             }
             catch (Exception ex)
@@ -141,6 +142,16 @@ namespace Dynamon_kuumalinja
                 MessageBox.Show(ex.Message);
             }
         }
-        #endregion        
+        #endregion
+
+        private void txbMessage_GotFocus(object sender, RoutedEventArgs e)
+        {
+            txbMessage.Text = "";
+        }
+
+        private void txbMessage_LostFocus(object sender, RoutedEventArgs e)
+        {
+            txbMessage.Text = "Send Message";
+        }
     }
 }
