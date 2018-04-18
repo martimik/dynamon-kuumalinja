@@ -113,7 +113,51 @@ namespace Dynamon_kuumalinja
                 throw ex;
             }
         }
-        #endregion 
+        #endregion
+        #region Register
+        public static bool CreateUser(string username, string password)// tarkistaa onko käyttäjänimi vapaana
+        {
+            try
+            {
+                // luodaan yhteys tietokantaan
+                string connstr = ConnectionString();
+                // haetaan käyttäjät
+                string sql = string.Format("SELECT userID, username FROM user WHERE username = @username");
+                using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
+                {
+                    conn.Open(); // avataan yhteys
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan
+                    cmd.Parameters.AddWithValue("@username", username);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader()) // luodaan datanlukija
+                    {
+                        while (reader.Read())
+                        {
+                            //ORM, readerin tiedot olioon
+                            if (username == reader.GetString(0)) // jos löydetään käyttäjänimellä mitään palautetaan false
+                            {
+                                return false;
+                            }                            
+                        }
+                    }
+
+                    // tietokannasta ei ole tässä pisteessä löytynyt mitään, joten luodaan insert
+                    sql = string.Format("INSERT INTO user (username, password, classID) VALUES (@username, @password, 1)"); // muutetaan sql lause
+                    cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan                    
+                    cmd.Parameters.AddWithValue("@password", password);                        
+                    cmd = conn.CreateCommand();// luodaan komento yhteyteen
+                    cmd.CommandText = sql; // sql insert lause
+                    cmd.ExecuteNonQuery(); // ajetaan sql lause
+                    return true;                    
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }        
+
+        #endregion
         #region Channels
         /*
          *
@@ -194,7 +238,7 @@ namespace Dynamon_kuumalinja
             {
                 List<Message> messages = new List<Message>();
                 string connstr = ConnectionString();
-                string sql = string.Format("SELECT message.timeStamp, user.username, message.content FROM message JOIN user ON message.userID = user.userID WHERE channelID = @channel");
+                string sql = string.Format("SELECT message.timeStamp, user.username, message.content, message.messageID FROM message JOIN user ON message.userID = user.userID WHERE channelID = @channel ORDER BY message.messageID ASC");
                 using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
                 {
                     conn.Open(); // avataan yhteys
@@ -207,8 +251,7 @@ namespace Dynamon_kuumalinja
                             messages.Add(new Message() { TimeStamp = reader.GetString(0), UserName = reader.GetString(1), Content = reader.GetString(2) });
                         }
                     }
-                }
-                messages.Reverse();
+                }                
                 return messages;
             }
             catch (Exception ex)
