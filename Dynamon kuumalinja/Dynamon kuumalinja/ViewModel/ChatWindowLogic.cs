@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using System.Windows.Threading;
 
 namespace Dynamon_kuumalinja
 {
     public static class ChatWindowLogic
     {
+        
+
 
         #region Channels
         public static List<Channel> HaeKanavat()// haetaan kanavat

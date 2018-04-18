@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Windows.Threading;
 
 namespace Dynamon_kuumalinja
 {
@@ -21,6 +22,9 @@ namespace Dynamon_kuumalinja
     {
         // fields
         private User kayttaja;
+        private DispatcherTimer timer;
+        private int chatRefresh = 10;
+
         // constructors
 #region Initialize
         public Chat(User user)
@@ -35,12 +39,22 @@ namespace Dynamon_kuumalinja
         {
             //bindingin kautta linkitetään setit
             libChannels.ItemsSource = ChatWindowLogic.HaeKanavat();
+            timer = new DispatcherTimer();            
+            timer.Tick += new EventHandler(ViestiHaku);
+            timer.Interval = TimeSpan.FromSeconds(chatRefresh);            
+        }
+
+        private void ViestiHaku(object sender, EventArgs e)
+        {
+            int kanava = (int)libChannels.SelectedValue;
+            GetMessages(kanava);
         }
         #endregion
         #region Passwordprompt
         
         private void ShowChannelPrompt() // swaps chat to password prompt
         {
+            timer.Stop(); // pysäyttää automaattisen viestinhaun
             TextBlock password = new TextBlock();// luodaan 
             password.Height = 30;
             password.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
@@ -117,6 +131,7 @@ namespace Dynamon_kuumalinja
                     if(ChatWindowLogic.CheckChannelPassword(kanava, password)) // lähetetään viesti                    
                     {
                         GetMessages(kanava);// haetaan viestit uudelleen
+                        timer.Start(); // jatkaa automaattista viestinhakua
                     }
                     else
                     {
@@ -153,5 +168,7 @@ namespace Dynamon_kuumalinja
         {
             txbMessage.Text = "Send Message";
         }
+
+
     }
 }
