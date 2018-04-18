@@ -56,6 +56,7 @@ namespace Dynamon_kuumalinja
             pass.Name = "pwbPass";
             pass.KeyDown += new KeyEventHandler(pwbPass_KeyDown);
             txbChatWindow.Children.Clear();
+            txbMessage.Visibility = Visibility.Hidden;
             txbChatWindow.Children.Add(password);
             txbChatWindow.Children.Add(pass);
         }
@@ -117,6 +118,7 @@ namespace Dynamon_kuumalinja
                     if(ChatWindowLogic.CheckChannelPassword(kanava, password)) // lähetetään viesti                    
                     {
                         GetMessages(kanava);// haetaan viestit uudelleen
+                        txbMessage.Visibility = Visibility.Visible;
                     }
                     else
                     {
