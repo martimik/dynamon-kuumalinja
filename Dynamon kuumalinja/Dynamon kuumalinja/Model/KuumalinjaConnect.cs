@@ -165,6 +165,10 @@ namespace Dynamon_kuumalinja
          *   
          */
 
+        public static void CreateChannel()
+        {
+
+        }
 
         public static List<Channel> GetChannels()// haetaan kanavat
         {
