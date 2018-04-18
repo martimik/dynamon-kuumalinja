@@ -5,7 +5,22 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Dynamon_kuumalinja"
         mc:Ignorable="d"
-        Title="Chat" Height="720" Width="1280" FontFamily="Calibri">
+        Title="Chat" Height="720" Width="1280" FontFamily="Calibri" Background="#eee">
+    <Window.Resources>
+        <Style TargetType="Button" x:Key="MyButton">
+            <Setter Property="Background" Value="#FF00497D" />
+            <Setter Property="TextBlock.TextAlignment" Value="Center" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border CornerRadius="5" Background="#FF00497D" BorderThickness="0,0,0,0" >
+                            <ContentPresenter x:Name="contentPresenter" ContentTemplate="{TemplateBinding ContentTemplate}" Content="{TemplateBinding Content}" HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" Margin="{TemplateBinding Padding}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}"/>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
     <Grid>
         <DockPanel>
             <Grid DockPanel.Dock="Top" Height="50" Margin="0,0,0,20" Background="#FF00497D">
@@ -21,11 +36,11 @@
 
             <DockPanel DockPanel.Dock="Right" Margin="0,0,20,0" Width="280">
                 <DockPanel Height="40" Width="250" DockPanel.Dock="Top" Margin="0,0,0,20">
-                    <Button x:Name="btnLogout" Content="Logout" DockPanel.Dock="Right" Margin="0,0,0,0" Width="70" Height="35" FontSize="14"/>
-                    <Button x:Name="btnAddChannel" DockPanel.Dock="Right" Margin="20,0,20,0" Width="70" Height="35" FontSize="12">
-                        <TextBlock Text="New Channel" TextAlignment="Center" TextWrapping="Wrap"></TextBlock>
+                    <Button Style="{StaticResource MyButton}" x:Name="btnLogout" Content="Logout" DockPanel.Dock="Right" Width="70" Height="35" FontSize="14" Foreground="White"/>
+                    <Button Style="{StaticResource MyButton}" x:Name="btnAddChannel" DockPanel.Dock="Right" Margin="10,0,10,0" Width="90" Height="35" FontSize="14">
+                        <TextBlock Text="New Channel" TextAlignment="Center" TextWrapping="Wrap" Foreground="White"></TextBlock>
                     </Button>
-                    <Button x:Name="btnRefresh" Content="Refresh" DockPanel.Dock="Right" Margin="0,0,0,0" Width="70" Height="35" FontSize="14"/>
+                    <Button Style="{StaticResource MyButton}" x:Name="btnRefresh" Content="Refresh" DockPanel.Dock="Right" Width="70" Height="35" FontSize="14" Foreground="White"/>
                 </DockPanel>
 
                 <ListBox x:Name="libChannels" ItemsSource="{Binding}" DisplayMemberPath="ChannelName" SelectedValuePath="ChannelID" DockPanel.Dock="Bottom" Margin="0,0,0,0" Width="250" HorizontalContentAlignment="Right" FontSize="16" MouseDoubleClick="libChannels_MouseDoubleClick" UseLayoutRounding="False">
@@ -37,7 +52,7 @@
                 </ListBox>
             </DockPanel>
 
-            <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="5" Margin="20,0,0,0">
+            <Border BorderThickness="1" BorderBrush="LightGray" CornerRadius="5" Margin="20,0,0,0" Background="White">
                 <StackPanel  x:Name="txbChatWindow" DockPanel.Dock="Left" VerticalAlignment="Top" Margin="0,0,0,0" Height="550">
                     <TextBlock x:Name="txbChatPlaceholder" Text="No Messages, Select Channel" Margin="5,0,0,0" FontSize="16" HorizontalAlignment="Left"></TextBlock>
                 </StackPanel>
