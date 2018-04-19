@@ -141,12 +141,12 @@ namespace Dynamon_kuumalinja
                         }
                     }
 
+
                     // tietokannasta ei ole tässä pisteessä löytynyt mitään, joten luodaan insert
                     sql = string.Format("INSERT INTO user (username, password, classID) VALUES (@username, @password, 1)"); // muutetaan sql lause
-                    cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan                    
-                    cmd.Parameters.AddWithValue("@password", password);                        
-                    cmd = conn.CreateCommand();// luodaan komento yhteyteen
-                    cmd.CommandText = sql; // sql insert lause
+                    cmd = new MySqlCommand(sql, conn);// asetetaan yhteys ja komento samaan muuttujaan   
+                    cmd.Parameters.AddWithValue("@username", username);
+                    cmd.Parameters.AddWithValue("@password", password);
                     cmd.ExecuteNonQuery(); // ajetaan sql lause
                     return true;                    
                 }

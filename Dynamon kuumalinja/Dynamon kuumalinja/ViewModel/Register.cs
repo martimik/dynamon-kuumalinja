@@ -14,19 +14,13 @@ namespace Dynamon_kuumalinja
         {
             try
             {
-                User kayttaja = new User() { UserName = username, PassWord = password};
+                User kayttaja = new User() { UserName = username, PassWord = password};// muunnetaan olioksi, niin saadaan chat auki
 
                 // haetaan käyttäjät ja salasanat
                 if (KuumalinjaConnect.CreateUser(kayttaja.UserName, kayttaja.PassWord))
                 {
-                    //avataan chat käyttäjälle
-                    var mainWindow = (Application.Current.MainWindow as MainWindow);
-                    if (mainWindow != null)
-                    {
-                        Chat chatti = new Chat(kayttaja);
-                        mainWindow.Close();
-                        chatti.Show();
-                    }
+                    //kirjaudutaan sisään
+                    Login.Kirjaudu(kayttaja.UserName, kayttaja.PassWord);
                 }
                 else // jos väärin niin popataan virheviesti
                 {

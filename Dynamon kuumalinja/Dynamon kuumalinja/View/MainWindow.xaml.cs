@@ -26,6 +26,8 @@ namespace Dynamon_kuumalinja
             InitializeComponent();
         }
 
+        
+        #region Events
         private void txtUser_KeyDown(object sender, KeyEventArgs e)
         {
             
@@ -34,7 +36,6 @@ namespace Dynamon_kuumalinja
                 btnLogin_Click(sender, e);
             }
         }
-
         private void pwbPassword_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Return)// when enter key is pressed, calling btnLogin_click
@@ -43,12 +44,20 @@ namespace Dynamon_kuumalinja
             }
         }
 
-        private void btnLogin_Click(object sender, RoutedEventArgs e) 
+        private void btnLogin_Click(object sender, RoutedEventArgs e) // on button click, based on buttons content do stuff
         {
             try
             {
-                // goes to viewmodel to check users'n'stuff
-                Login.Kirjaudu(txtUser.Text, pwbPassword.Password);
+                if(btnLogin.Content.ToString() == "Kirjaudu")
+                {
+                    // goes to viewmodel to check users'n'stuff
+                    Login.Kirjaudu(txtUser.Text, pwbPassword.Password);
+                }
+                else if(btnLogin.Content.ToString() == "Rekisteröidy")
+                {
+                    Register.LuoKayttaja(txtUser.Text, pwbPassword.Password);
+                }
+                
             }
             catch (Exception ex)
             {
@@ -57,5 +66,27 @@ namespace Dynamon_kuumalinja
             }
             
         }
+
+        private void txbRegister_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) // swaps between registering and login
+        {
+            try
+            {
+                if(btnLogin.Content.ToString() == "Kirjaudu")
+                {
+                    btnLogin.Content = "Rekisteröidy";
+                    txbRegister.Text = "Kirjaudu";
+                }
+                else if (btnLogin.Content.ToString() == "Rekisteröidy")
+                {
+                    btnLogin.Content = "Kirjaudu";
+                    txbRegister.Text = "Rekisteröidy";
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+#endregion
     }
 }
