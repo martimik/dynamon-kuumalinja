@@ -18,7 +18,7 @@ namespace Dynamon_kuumalinja
                 // haetaan käyttäjät ja salasanat
                 if (KuumalinjaConnect.CheckLogin(kayttaja) != null)
                 {
-                    kayttaja = KuumalinjaConnect.CheckLogin(kayttaja); // ei hyvä, tekee mysql haun uudestaan
+                    kayttaja = KuumalinjaConnect.CheckLogin(kayttaja); 
                     var mainWindow = (Application.Current.MainWindow as MainWindow);
                     if(mainWindow != null)
                     {                       

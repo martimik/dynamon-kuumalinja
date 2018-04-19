@@ -36,7 +36,7 @@
 
             <DockPanel DockPanel.Dock="Right" Margin="0,0,20,0" Width="280">
                 <DockPanel Height="40" Width="250" DockPanel.Dock="Top" Margin="0,0,0,20">
-                    <Button Style="{StaticResource MyButton}" x:Name="btnLogout" Content="Logout" DockPanel.Dock="Right" Width="70" Height="35" FontSize="14" Foreground="White"/>
+                    <Button Style="{StaticResource MyButton}" x:Name="btnLogout" Content="Logout" DockPanel.Dock="Right" Width="70" Height="35" FontSize="14" Foreground="White" Click="btnLogout_Click"/>
                     <Button Style="{StaticResource MyButton}" x:Name="btnAddChannel" DockPanel.Dock="Right" Margin="10,0,10,0" Width="90" Height="35" FontSize="14">
                         <TextBlock Text="New Channel" TextAlignment="Center" TextWrapping="Wrap" Foreground="White"></TextBlock>
                     </Button>

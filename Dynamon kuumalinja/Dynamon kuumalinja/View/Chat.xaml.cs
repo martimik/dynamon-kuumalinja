@@ -94,6 +94,24 @@ namespace Dynamon_kuumalinja
         #endregion
         #region Events
         //Events
+        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                kayttaja = null;            
+                if (kayttaja == null)
+                {
+                    MainWindow mainWindow = new MainWindow();
+                    mainWindow.Show();
+                    this.Close();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        
         private void txbMessage_KeyDown(object sender, KeyEventArgs e)
         {
             try
@@ -169,8 +187,6 @@ namespace Dynamon_kuumalinja
         private void txbMessage_LostFocus(object sender, RoutedEventArgs e)
         {
             txbMessage.Text = "Send Message";
-        }
-
-
+        }        
     }
 }
