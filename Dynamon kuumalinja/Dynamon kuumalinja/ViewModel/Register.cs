@@ -14,13 +14,11 @@ namespace Dynamon_kuumalinja
         {
             try
             {
-                User kayttaja = new User() { UserName = username, PassWord = password};// muunnetaan olioksi, niin saadaan chat auki
-
                 // haetaan käyttäjät ja salasanat
-                if (KuumalinjaConnect.CreateUser(kayttaja.UserName, kayttaja.PassWord))
+                if (KuumalinjaConnect.CreateUser(username, password))
                 {
-                    //kirjaudutaan sisään
-                    Login.Kirjaudu(kayttaja.UserName, kayttaja.PassWord);
+                    //kirjaudutaan sisään uudella haulla, koska ei tiedetä käyttäjän userID:tä
+                    Login.Kirjaudu(username, password);
                 }
                 else // jos väärin niin popataan virheviesti
                 {

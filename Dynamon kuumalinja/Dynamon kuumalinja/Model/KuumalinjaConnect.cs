@@ -122,7 +122,7 @@ namespace Dynamon_kuumalinja
                 // luodaan yhteys tietokantaan
                 string connstr = ConnectionString();
                 // haetaan käyttäjät
-                string sql = string.Format("SELECT userID, username FROM user WHERE username = @username");
+                string sql = string.Format("SELECT username FROM user WHERE username = @username");
                 using (MySqlConnection conn = new MySqlConnection(connstr)) // tietokannan määritykset tässä
                 {
                     conn.Open(); // avataan yhteys
@@ -135,8 +135,8 @@ namespace Dynamon_kuumalinja
                         {
                             //ORM, readerin tiedot olioon
                             if (username == reader.GetString(0)) // jos löydetään käyttäjänimellä mitään palautetaan false
-                            {
-                                return false;
+                            {                                
+                                return false;                                
                             }                            
                         }
                     }
