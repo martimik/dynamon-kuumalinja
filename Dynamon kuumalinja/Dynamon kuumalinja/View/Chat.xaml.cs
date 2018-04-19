@@ -51,7 +51,43 @@ namespace Dynamon_kuumalinja
         }
         #endregion
         #region Passwordprompt
-        
+
+        private void btnAddChannel_Click(object sender, RoutedEventArgs e) // kanavan lisäys
+        {
+            timer.Stop();
+            TextBlock channel = new TextBlock();
+            channel.Height = 30;
+            channel.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            channel.Margin = new Thickness(0, 20, 0, 10);
+            channel.FontSize = 18;
+            channel.Text = "Channel Name:";
+            TextBox channelname = new TextBox();
+            channelname.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            channelname.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            channelname.Height = 25;
+            channelname.Width = 200;
+            channelname.FontSize = 16;
+            channelname.Name = "txbChannel";
+            channelname.KeyDown += new KeyEventHandler(createChannel_KeyDown);
+            TextBlock pass = new TextBlock();
+            pass.Height = 30;
+            pass.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            pass.Margin = new Thickness(0, 20, 0, 10);
+            pass.FontSize = 18;
+            pass.Text = "Channel Password:";
+            PasswordBox password = new PasswordBox();
+            password.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            password.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
+            password.Height = 25;
+            password.Width = 200;
+            password.FontSize = 16;
+            password.Name = "pwbPass";
+            password.KeyDown += new KeyEventHandler(createChannel_KeyDown);
+            txbChatWindow.Children.Clear();
+            txbMessage.Visibility = Visibility.Hidden;
+
+        }
+
         private void ShowChannelPrompt() // swaps chat to password prompt
         {
             timer.Stop(); // pysäyttää automaattisen viestinhaun
@@ -94,6 +130,31 @@ namespace Dynamon_kuumalinja
         #endregion
         #region Events
         //Events
+        private void createChannel_KeyDown(object sender, KeyEventArgs e)
+        {
+            /* KESKEN
+            *             
+            *            
+            *           
+            *          
+            *         
+            */
+            try
+            {
+                if (e.Key == Key.Return)
+                {
+                                        
+                    
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
+        }
+
         private void btnLogout_Click(object sender, RoutedEventArgs e)
         {
             try
@@ -187,6 +248,8 @@ namespace Dynamon_kuumalinja
         private void txbMessage_LostFocus(object sender, RoutedEventArgs e)
         {
             txbMessage.Text = "Send Message";
-        }        
+        }
+
+        
     }
 }

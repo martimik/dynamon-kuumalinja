@@ -13,6 +13,17 @@ namespace Dynamon_kuumalinja
 
 
         #region Channels
+        public static void LuoKanava(string nimi, string password)
+        {
+            try
+            {
+                KuumalinjaConnect.CreateChannel(nimi, password);                
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
         public static List<Channel> HaeKanavat()// haetaan kanavat
         {
             try

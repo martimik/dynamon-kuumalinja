@@ -165,9 +165,26 @@ namespace Dynamon_kuumalinja
          *   
          */
 
-        public static void CreateChannel()
+        public static void CreateChannel(string channel, string password)// kanavan luonti
         {
-
+            try
+            {
+                string connstr = ConnectionString();
+                string sql = string.Format("INSERT INTO channel (channelName, channelPassword) VALUES (@channel, @password)");
+                using (MySqlConnection conn = new MySqlConnection(connstr))
+                {
+                    conn.Open(); // avataan yhteys
+                    MySqlCommand cmd = conn.CreateCommand();// luodaan komento yhteyteen                    
+                    cmd.Parameters.AddWithValue("@channel", channel);
+                    cmd.Parameters.AddWithValue("@password", password);
+                    cmd.CommandText = sql; // sql insert lause
+                    cmd.ExecuteNonQuery(); // ajetaan sql lause                    
+                }
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
         }
 
         public static List<Channel> GetChannels()// haetaan kanavat
