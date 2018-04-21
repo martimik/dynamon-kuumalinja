@@ -67,19 +67,19 @@ namespace Dynamon_kuumalinja
             
         }
 
-        private void txbRegister_MouseLeftButtonDown(object sender, MouseButtonEventArgs e) // swaps between registering and login
+        private void btnRegister_Click(object sender, RoutedEventArgs e)
         {
             try
             {
-                if(btnLogin.Content.ToString() == "Kirjaudu")
+                if (btnLogin.Content.ToString() == "Kirjaudu")
                 {
                     btnLogin.Content = "Rekisteröidy";
-                    txbRegister.Text = "Kirjaudu";
+                    btnRegister.Content = "Kirjaudu";
                 }
                 else if (btnLogin.Content.ToString() == "Rekisteröidy")
                 {
                     btnLogin.Content = "Kirjaudu";
-                    txbRegister.Text = "Rekisteröidy";
+                    btnRegister.Content = "Rekisteröidy";
                 }
             }
             catch (Exception ex)
@@ -87,6 +87,6 @@ namespace Dynamon_kuumalinja
                 throw ex;
             }
         }
-#endregion
+        #endregion
     }
 }

@@ -55,12 +55,23 @@ namespace Dynamon_kuumalinja
         private void btnAddChannel_Click(object sender, RoutedEventArgs e) // kanavan lisäys
         {
             timer.Stop();
+            txbChatWindow.Children.Clear();
+
+            TextBlock title = new TextBlock();
+            title.Height = 40;
+            title.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
+            title.Margin = new Thickness(0, 20, 0, 20);
+            title.FontSize = 24;
+            title.FontStyle = FontStyles.Italic;
+            title.Text = "Add New Channel";
+
             TextBlock channel = new TextBlock();
             channel.Height = 30;
             channel.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             channel.Margin = new Thickness(0, 20, 0, 10);
             channel.FontSize = 18;
             channel.Text = "Channel Name:";
+
             TextBox channelname = new TextBox();
             channelname.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             channelname.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
@@ -69,12 +80,14 @@ namespace Dynamon_kuumalinja
             channelname.FontSize = 16;
             channelname.Name = "txbChannel";
             channelname.KeyDown += new KeyEventHandler(createChannel_KeyDown);
+
             TextBlock pass = new TextBlock();
             pass.Height = 30;
             pass.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             pass.Margin = new Thickness(0, 20, 0, 10);
             pass.FontSize = 18;
             pass.Text = "Channel Password:";
+
             PasswordBox password = new PasswordBox();
             password.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             password.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
@@ -82,8 +95,13 @@ namespace Dynamon_kuumalinja
             password.Width = 200;
             password.FontSize = 16;
             password.Name = "pwbPass";
+
+            txbChatWindow.Children.Add(title);
+            txbChatWindow.Children.Add(channel);
+            txbChatWindow.Children.Add(channelname);
+            txbChatWindow.Children.Add(pass);
+            txbChatWindow.Children.Add(password);
             password.KeyDown += new KeyEventHandler(createChannel_KeyDown);
-            txbChatWindow.Children.Clear();
             txbMessage.Visibility = Visibility.Hidden;
 
         }
@@ -91,12 +109,14 @@ namespace Dynamon_kuumalinja
         private void ShowChannelPrompt() // swaps chat to password prompt
         {
             timer.Stop(); // pysäyttää automaattisen viestinhaun
+
             TextBlock password = new TextBlock();// luodaan 
             password.Height = 30;
             password.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             password.Margin = new Thickness(0, 20, 0, 10);
             password.FontSize = 18;
             password.Text = "Channel Password:";
+
             PasswordBox pass = new PasswordBox();
             pass.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
             pass.HorizontalContentAlignment = System.Windows.HorizontalAlignment.Center;
@@ -105,6 +125,7 @@ namespace Dynamon_kuumalinja
             pass.FontSize = 16;
             pass.Name = "pwbPass";
             pass.KeyDown += new KeyEventHandler(pwbPass_KeyDown);
+
             txbChatWindow.Children.Clear();
             txbMessage.Visibility = Visibility.Hidden;
             txbChatWindow.Children.Add(password);
