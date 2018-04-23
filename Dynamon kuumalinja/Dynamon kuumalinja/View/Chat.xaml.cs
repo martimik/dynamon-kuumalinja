@@ -50,12 +50,13 @@ namespace Dynamon_kuumalinja
             GetMessages(kanava);
         }
         #endregion
-        #region Passwordprompt
+        #region Userprompt
 
         private void btnAddChannel_Click(object sender, RoutedEventArgs e) // kanavan lisäys
         {
             timer.Stop();
             txbChatWindow.Children.Clear();
+           
 
             TextBlock title = new TextBlock();
             title.Height = 40;
@@ -95,13 +96,14 @@ namespace Dynamon_kuumalinja
             password.Width = 200;
             password.FontSize = 16;
             password.Name = "pwbPass";
+            password.KeyDown += new KeyEventHandler(createChannel_KeyDown);
 
             txbChatWindow.Children.Add(title);
             txbChatWindow.Children.Add(channel);
             txbChatWindow.Children.Add(channelname);
             txbChatWindow.Children.Add(pass);
             txbChatWindow.Children.Add(password);
-            password.KeyDown += new KeyEventHandler(createChannel_KeyDown);
+           
             txbMessage.Visibility = Visibility.Hidden;
 
         }
@@ -152,21 +154,40 @@ namespace Dynamon_kuumalinja
         #region Events
         //Events
         private void createChannel_KeyDown(object sender, KeyEventArgs e)
-        {
-            /* KESKEN
-            *             
-            *            
-            *           
-            *          
-            *         
-            */
+        {            
             try
             {
                 if (e.Key == Key.Return)
                 {
-                                        
-                    
+                    TextBox kanava = new TextBox();
+                    PasswordBox passu = new PasswordBox();                    
 
+                    foreach (object child in txbChatWindow.Children)// käydään txbChatWindow läpi ja asetetaan halutut arvot
+                    {
+                        if(child is PasswordBox)// jos objecti on passwordbox castataan sen arvot muuttujaan
+                        {
+                            passu = (PasswordBox)child;
+                            if(passu.Password == null)
+                            {
+                                throw new Exception("Please enter password");
+                            }
+                        }
+                        else if(child is TextBox) // jos objecti on textbox castataan se muuttujaan
+                        {
+                            kanava = (TextBox)child;
+                            if(kanava.Text == null)
+                            {
+                                throw new Exception("Please enter channel name");
+                            }
+                        }
+                    }
+                    txbChatWindow.Children.Clear();
+                    ChatWindowLogic.LuoKanava(kanava.Text, passu.Password);
+                    libChannels.ItemsSource = ChatWindowLogic.HaeKanavat();
+                    passu = null;
+                    kanava = null;
+
+                    
                 }
             }
             catch (Exception ex)
@@ -176,7 +197,7 @@ namespace Dynamon_kuumalinja
 
         }
 
-        private void btnLogout_Click(object sender, RoutedEventArgs e)
+        private void btnLogout_Click(object sender, RoutedEventArgs e)// sulkee chatin ja palauttaa mainwindowin
         {
             try
             {
@@ -194,7 +215,7 @@ namespace Dynamon_kuumalinja
             }
         }
         
-        private void txbMessage_KeyDown(object sender, KeyEventArgs e)
+        private void txbMessage_KeyDown(object sender, KeyEventArgs e)// viestin lähetys
         {
             try
             {
@@ -214,7 +235,7 @@ namespace Dynamon_kuumalinja
             }
 
         }      
-        private void pwbPass_KeyDown(object sender, KeyEventArgs e)
+        private void pwbPass_KeyDown(object sender, KeyEventArgs e)// 
         {
             try
             {
