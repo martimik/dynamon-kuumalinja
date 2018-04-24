@@ -75,9 +75,6 @@ Yhdessä:
 
 ## TO-DO
 
-- Viestinlähetyksen piilotus/paljastus, kun käyttäjä kirjautuu sisään kanavalle/vaihtaa kanavaa
-- Kanavien salasanojen promptin ulkonäkö
-- Registerin teko (integroidaanko loginiin, jos ei ole tunnuksia niin luodaan, vaatii pientä mietintää)
 - encryptaus salasanoille (md5 tietokannoissa, mutta ei ole turvallinen)
 - tietokanta palvelimen muunto app.config tiedostoon ja sen encryptaus // jos tehdään
 
@@ -91,6 +88,13 @@ Yhdessä:
 - Kanavien salasanojen prompti
 - dialogiboxi väärillä tunnuksilla tapahtuvalle kirjautumisyritykselle
 - Chat ikkuna
+- Viestinlähetyksen piilotus/paljastus, kun käyttäjä kirjautuu sisään kanavalle/vaihtaa kanavaa
+- Kanavien salasanojen promptin ulkonäkö
+- Registerin teko (integroidaanko loginiin, jos ei ole tunnuksia niin luodaan, vaatii pientä mietintää)
+- Sovelluksen ulkonäkö
+- uloskirjautuminen
+- kanavien ja viestien automaattinen päivitys
+- refresh -painike
 - ER-kaavio
 - Testidata
 - C# mysql referenssit
