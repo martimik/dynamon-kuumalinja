@@ -12,15 +12,13 @@ using System.Windows;
 namespace Dynamon_kuumalinja
 {
     public static class KuumalinjaConnect
-    {       
-        // connection string pitää muuttaa
+    {               
         private static string ConnectionString()// 
-        {
-
-            //string pw = "7D96QWGRw3MofzwXw7pr7Dqj6Uhvp9Hj";       
+        {                 
 
             string pw = "";
-            
+            string connect = "";
+
             if (ConfigurationManager.AppSettings["hash"] == "false")// hash logiikka
             {
                 pw = ConfigurationManager.AppSettings["Password"];                              
@@ -28,6 +26,7 @@ namespace Dynamon_kuumalinja
                 configuration.AppSettings.Settings["hash"].Value = "true";// asetetaan hashays todeksi
                 configuration.AppSettings.Settings["Password"].Value = EncryptPass(ConfigurationManager.AppSettings["Password"]);
                 configuration.Save();
+               
                 ConfigurationManager.RefreshSection("appSettings");
             }
             else if(ConfigurationManager.AppSettings["hash"] == "true")
@@ -35,8 +34,9 @@ namespace Dynamon_kuumalinja
                 pw = DecryptPass(ConfigurationManager.AppSettings["Password"]);
             }
 
-
-            return string.Format("Data source=mysql.labranet.jamk.fi;Initial Catalog=K8936_3;user=K8936;password={0}", pw);            
+            connect = ConfigurationManager.AppSettings["Connect"];
+            
+            return string.Format(connect, pw);            
         }
         #region hash      
 
